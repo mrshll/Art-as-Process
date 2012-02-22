@@ -1,0 +1,10 @@
+This is a collection of small projects for the class Art as Process at Tufts
+University. My goal is to combine my love of programming and desire to do art.
+
+-Paranoia is a app in response to the prompt 'Paranoia has the tendency to form
+skeptical systems.' The web page pulls the 500 most recent images posted to
+flickr tagged with 'portrait'. It then proceeds to flash the images at 50-100 ms
+intervals, causing a strobing effect of faces.
+
+-Sip-Timer was created during an in-class assignment to 'gather data' in the
+Tufts student center. It helps measure time inbetween peoples sips.
