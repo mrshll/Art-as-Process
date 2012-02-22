@@ -1,0 +1,17 @@
+#name{
+    font-size:large;
+    margin-top:10px;
+    margin-botton:20px;
+}
+
+#start{
+    width:200px;
+    height:100px;
+    background-color:green;
+}
+
+#end{
+    width:200px;
+    height:100px;
+    background-color:red;
+}
