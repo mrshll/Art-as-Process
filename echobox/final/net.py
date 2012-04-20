@@ -9,6 +9,7 @@
 import gobject, pygst
 pygst.require("0.10")
 import gst
+import sys
 
 if len(sys.argv) != 2:
     print("Error - usage is " + sys.argv[0] + " host_ip_address")
