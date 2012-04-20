@@ -1,6 +1,4 @@
-gst-launch-0.10 autoaudiosrc ! audioconvert ! flacenc ! tcpclientsink
-host=localhost port=3201
+gst-launch-0.10 autoaudiosrc ! audioconvert ! flacenc ! tcpclientsink host=localhost port=3201
 
-gst-launch-0.10 tcpserversrc host=localhost port=3201 ! decodebin ! audioconvert
-! alsasink
+gst-launch-0.10 tcpserversrc host=localhost port=3201 ! decodebin ! audioconvert ! alsasink
 
