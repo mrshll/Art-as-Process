@@ -45,7 +45,7 @@ pipeline.add(flacenc)
 client = gst.element_factory_make("tcpclientsink", "client")
 pipeline.add(client)
 client.set_property("host", sys.argv[2])
-client.set_property("port", 3000)
+client.set_property("port", 3201)
 gst.element_link_many(src, audioqueue, convert, flacenc, client)
 
 #Begin Playing

@@ -25,7 +25,7 @@ pipeline = gst.Pipeline("server")
 tcpsrc = gst.element_factory_make("tcpserversrc", "source")
 pipeline.add(tcpsrc)
 tcpsrc.set_property("host", sys.argv[1])
-tcpsrc.set_property("port", 3000)
+tcpsrc.set_property("port", 3201)
 
 decode = gst.element_factory_make("decodebin", "decode")
 decode.connect("new-decoded-pad", new_decode_pad)
