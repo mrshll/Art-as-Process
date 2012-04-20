@@ -14,7 +14,7 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 
-DELAY = long(argv[1] * 1000000000)
+DELAY = long(sys.argv[1] * 1000000000)
 
 # create a pipeline and add [ filesrc ! tcpclientsink ]
 pipeline = gst.Pipeline("client")
@@ -44,7 +44,7 @@ pipeline.add(flacenc)
 #Link the elements
 client = gst.element_factory_make("tcpclientsink", "client")
 pipeline.add(client)
-client.set_property("host", argv[2])
+client.set_property("host", sys.argv[2])
 client.set_property("port", 3000)
 gst.element_link_many(src, audioqueue, convert, flacenc, client)
 
