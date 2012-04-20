@@ -9,20 +9,15 @@ pygst.require("0.10")
 import gst
 import sys
 
-try:
-        DELAY = float(sys.argv[1])
-        DELAY = long(DELAY * 1000000000)
-        print DELAY
-except IndexError:
-        DELAY = 0
+DELAY = long(10 * 1000000000)
 
 # create a pipeline and add [ filesrc ! tcpclientsink ]
 pipeline = gst.Pipeline("client")
 
 #ALSA
-audiosrc = gst.element_factory_make("alsasrc", "audio")
-audiosrc.set_property("device","default")
-pipeline.add(audiosrc)
+src = gst.element_factory_make("alsasrc", "audio")
+src.set_property("device","default")
+pipeline.add(src)
 
 #Queue
 audioqueue = gst.element_factory_make("queue","queue1")
@@ -33,13 +28,20 @@ audioqueue.set_property("min-threshold-time",DELAY)
 audioqueue.set_property("leaky","no")
 pipeline.add(audioqueue)
 
+#CONVERT
+convert = gst.element_factory_make("audioconvert", "convert")
+pipeline.add(convert)
+
+#FLACENC
+flacenc = gst.element_factory_make("flacenc", "encoder")
+pipeline.add(flacenc)
 
 #Link the elements
 client = gst.element_factory_make("tcpclientsink", "client")
 pipeline.add(client)
 client.set_property("host", "127.0.0.1")
 client.set_property("port", 3000)
-audioqueue.link(client)
+gst.element_link_many(src, audioqueue, convert, flacenc, client)
 
 #Begin Playing
 pipeline.set_state(gst.STATE_PLAYING)
