@@ -10,6 +10,10 @@ import gobject, pygst
 pygst.require("0.10")
 import gst
 
+if len(sys.argv) != 2:
+    print("Error - usage is " + sys.argv[0] + " host_ip_address")
+    sys.exit(1)
+
 # Callback for the decodebin source pad
 def new_decode_pad(dbin, pad, islast):
         pad.link(convert.get_pad("sink"))
@@ -19,7 +23,7 @@ pipeline = gst.Pipeline("server")
 
 tcpsrc = gst.element_factory_make("tcpserversrc", "source")
 pipeline.add(tcpsrc)
-tcpsrc.set_property("host", "127.0.0.1")
+tcpsrc.set_property("host", sys.argv[1])
 tcpsrc.set_property("port", 3000)
 
 decode = gst.element_factory_make("decodebin", "decode")
