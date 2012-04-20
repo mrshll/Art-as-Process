@@ -13,8 +13,14 @@ if len(sys.argv) != 3:
     print("Error - usage is " + sys.argv[0] + " delay_seconds host_ip_address")
     sys.exit(1)
 
+print(sys.argv)
 
-DELAY = long(sys.argv[1] * 1000000000)
+try:
+        DELAY = float(sys.argv[1])
+        DELAY = long(DELAY * 1000000000)
+        print DELAY
+except IndexError:
+        DELAY = 0
 
 # create a pipeline and add [ filesrc ! tcpclientsink ]
 pipeline = gst.Pipeline("client")
